@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
 
-  spec.files = Dir["{ext,lib}/**/*.*"]
+  spec.files = Dir["{ext,lib}/**/*.{h,c,rb,swift}"]
   spec.extensions = ["ext/counter/extconf.rb"]
   spec.require_paths = ["lib"]
 end
