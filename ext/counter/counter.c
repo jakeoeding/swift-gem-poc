@@ -31,8 +31,8 @@ static VALUE rb_counter_initialize(VALUE self, VALUE initial_count, VALUE step) 
 static VALUE rb_counter_increment(VALUE self) {
     Counter *counter;
     TypedData_Get_Struct(self, Counter, &rb_counter_type, counter);
-    counter_increment(counter);
-    return Qnil;
+    int32_t new_count = counter_increment(counter);
+    return INT2NUM(new_count);
 }
 
 void Init_counter() {

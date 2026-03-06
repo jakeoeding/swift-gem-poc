@@ -7,7 +7,8 @@ final class Counter {
         self.step = step
     }
 
-    public func increment() {
-        self.count += self.step
+    public func increment() -> Int32 {
+        count += step
+        return count
     }
 }

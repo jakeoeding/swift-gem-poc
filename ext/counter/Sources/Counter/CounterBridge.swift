@@ -5,9 +5,9 @@ func counterCreate(initialCount: Int32, step: Int32) -> UnsafeMutableRawPointer 
 }
 
 @_cdecl("counter_increment")
-func counterIncrement(ptr: UnsafeMutableRawPointer) {
+func counterIncrement(ptr: UnsafeMutableRawPointer) -> Int32 {
     let counter = Unmanaged<Counter>.fromOpaque(ptr).takeUnretainedValue()
-    counter.increment()
+    return counter.increment()
 }
 
 @_cdecl("counter_destroy")
