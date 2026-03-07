@@ -35,8 +35,8 @@ static VALUE rb_counter_increment(VALUE self) {
     return INT2NUM(new_count);
 }
 
-void Init_counter() {
-    VALUE module = rb_define_module("Counter");
+void Init_swift_counter() {
+    VALUE module = rb_define_module("SwiftCounter");
     VALUE klass = rb_define_class_under(module, "Counter", rb_cObject);
 
     rb_define_alloc_func(klass, rb_counter_alloc);
