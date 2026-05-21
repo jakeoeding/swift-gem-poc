@@ -8,7 +8,7 @@ You'll need a Swift toolchain and a C compiler. Clang is included with the Swift
 ## Implementation Details
 
 - The core implementation is a Counter class implemented in pure Swift.
-- The implementation is bridged to C using wrapper functions annotated with `@_cdecl`. These wrapper functions are representable and callable in C. They utilize opaque pointers passed through the Swift/C boundary.
+- The implementation is bridged to C using wrapper functions annotated with `@c`. These wrapper functions are representable and callable in C. They utilize opaque pointers passed through the Swift/C boundary.
 - There is a hand written header file that outlines the C contract exposed from the Swift bridge.
 - The functions from the header file are wrapped with Ruby C API glue code to make them useable within the context of Ruby.
 
