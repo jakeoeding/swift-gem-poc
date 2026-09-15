@@ -1,4 +1,4 @@
-// swift-tools-version: 6.3
+// swift-tools-version: 6.4
 
 import PackageDescription
 
@@ -8,12 +8,16 @@ let package = Package(
         .library(
             name: "Counter",
             type: .dynamic,
-            targets: ["Counter"]
+            targets: ["Counter"],
         ),
     ],
     targets: [
         .target(
-            name: "Counter"
+            name: "Counter",
+            dependencies: ["CounterShim"],
         ),
+        .target(
+            name: "CounterShim",
+        )
     ]
 )
