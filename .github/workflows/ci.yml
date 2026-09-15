@@ -17,6 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Import Swift signing keys (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          curl -fsSL --compressed --retry 3 https://www.swift.org/keys/all-keys.asc | gpg --import -
+
       - name: Setup Swift
         uses: swift-actions/setup-swift@v3
         with:
