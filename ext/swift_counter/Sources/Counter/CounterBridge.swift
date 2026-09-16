@@ -1,40 +1,48 @@
-@c(counter_create)
-public func counterCreate(initialCount: Int32, step: Int32) -> UnsafeMutableRawPointer {
-    let counter = Counter(initialCount: initialCount, step: step)
-    return Unmanaged.passRetained(counter).toOpaque()
+import CounterShim
+
+@c @implementation
+public func counter_create(_ initial_count: Int32, _ step: Int32) -> OpaquePointer {
+    let counter = Counter(initialCount: initial_count, step: step)
+    return OpaquePointer(Unmanaged.passRetained(counter).toOpaque())
 }
 
-@c(counter_increment)
-public func counterIncrement(ptr: UnsafeMutableRawPointer) -> Int32 {
+@c @implementation
+public func counter_increment(_ counter: OpaquePointer) -> Int32 {
+    let ptr = UnsafeRawPointer(counter)
     let counter = Unmanaged<Counter>.fromOpaque(ptr).takeUnretainedValue()
     return counter.increment()
 }
 
-@c(counter_get_count)
-public func counterGetCount(ptr: UnsafeMutableRawPointer) -> Int32 {
+@c @implementation
+public func counter_get_count(_ counter: OpaquePointer) -> Int32 {
+    let ptr = UnsafeRawPointer(counter)
     let counter = Unmanaged<Counter>.fromOpaque(ptr).takeUnretainedValue()
     return counter.count
 }
 
-@c(counter_set_count)
-public func counterSetCount(ptr: UnsafeMutableRawPointer, newCount: Int32) {
+@c @implementation
+public func counter_set_count(_ counter: OpaquePointer, _ new_count: Int32) {
+    let ptr = UnsafeRawPointer(counter)
     let counter = Unmanaged<Counter>.fromOpaque(ptr).takeUnretainedValue()
-    counter.count = newCount
+    counter.count = new_count
 }
 
-@c(counter_get_step)
-public func counterGetStep(ptr: UnsafeMutableRawPointer) -> Int32 {
+@c @implementation
+public func counter_get_step(_ counter: OpaquePointer) -> Int32 {
+    let ptr = UnsafeRawPointer(counter)
     let counter = Unmanaged<Counter>.fromOpaque(ptr).takeUnretainedValue()
     return counter.step
 }
 
-@c(counter_set_step)
-public func counterSetStep(ptr: UnsafeMutableRawPointer, newStep: Int32) {
+@c @implementation
+public func counter_set_step(_ counter: OpaquePointer, _ new_step: Int32) {
+    let ptr = UnsafeRawPointer(counter)
     let counter = Unmanaged<Counter>.fromOpaque(ptr).takeUnretainedValue()
-    counter.step = newStep
+    counter.step = new_step
 }
 
-@c(counter_destroy)
-public func counterDestroy(ptr: UnsafeMutableRawPointer) {
+@c @implementation
+public func counter_destroy(_ counter: OpaquePointer) {
+    let ptr = UnsafeRawPointer(counter)
     Unmanaged<Counter>.fromOpaque(ptr).release()
 }
